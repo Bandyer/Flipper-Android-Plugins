@@ -18,6 +18,8 @@ class FlipperOKHttpClient(
 
     override fun newCall(request: Request): Call = client.newCall(request)
 
+    override fun newBuilder(): Builder = client.newBuilder()
+
     override fun newWebSocket(request: Request, listener: WebSocketListener): WebSocket {
 
         val url = request.url.toUrl().toString()

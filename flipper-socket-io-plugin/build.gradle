@@ -7,7 +7,7 @@ plugins {
 def projectGroup = "com.bandyer.flipper"
 def projectName = "flipper-socket-io-plugin"
 
-version = "1.0.0"
+version = "1.0.2"
 
 android {
     compileSdk 31
