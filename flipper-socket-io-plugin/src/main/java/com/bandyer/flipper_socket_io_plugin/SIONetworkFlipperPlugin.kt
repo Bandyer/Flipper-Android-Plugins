@@ -11,6 +11,8 @@ import com.facebook.flipper.core.FlipperArray
 import com.facebook.flipper.core.FlipperConnection
 import com.facebook.flipper.core.FlipperObject
 import com.facebook.flipper.core.FlipperPlugin
+import com.facebook.flipper.core.FlipperReceiver
+import com.facebook.flipper.core.FlipperResponder
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import org.json.JSONArray
 import org.json.JSONObject
@@ -84,6 +86,12 @@ class SIONetworkFlipperPlugin(context: Context) : FlipperPlugin {
 
     override fun onConnect(connection: FlipperConnection?) {
         this.connection = connection
+
+        connection?.receive("clearLogs") { params, _ ->
+            val url = params.getString("url")
+            socketEvents[url]?.clear()
+            updateEvents(url, socketEvents[url]!!)
+        }
     }
 
     private fun updateEvents(url: String, events: List<SocketEvent>) {
